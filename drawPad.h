@@ -28,6 +28,18 @@ public:
                         }
                 }
         }
+        drawpad(int x, int y):sizex(x),sizey(y)
+        {
+                dp = new char*[sizex + 1];
+                for(int i = 0; i < sizex + 1; i++)
+                {
+                        dp[i] = new char[sizey + 1];
+                        for(int j = 0; j < sizey + 1; j++)
+                        {
+                                        dp[i][j] = ' ';
+                        }
+                }
+        }
         void shiftX(int x)
         {
                 if(x > 0)
@@ -58,9 +70,9 @@ public:
                 if(y > 0)
                 {       for(int j = 0; j < sizex; j++)
                         {
-                                for(int i = sizey - 1; i > y - 1; i--)
+                                for(int i = sizey; i > y - 1; i--)
                                 {
-                                        dp[i][j] = dp[i][j + y];
+                                        dp[j][i] = dp[j][i - y];
                                 }
                         }
                         return;
@@ -73,7 +85,7 @@ public:
                                 for(int i = 0; i < sizey - y ; i++)
                                 {
 
-                                        dp[i][j] = dp[i][j + y];
+                                        dp[j][i] = dp[j][i + y];
                                 }
                         }
                 }
